@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Device Discovery Tool</title>
+    <style>
+        body {
+            background-image: url('bg1.jpg');
+            background-size: 100% 100%;
+            background-position: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        h1 {
+           color: #ffffff; 
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 48%; 
+            margin: 20px;
+        }
+
+        label, input {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 600px) {
+            .form-container {
+                flex-direction: column;
+            }
+
+            form {
+                width: 90%;
+                margin: 20px auto;
+            }
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #890C42;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button-container a:hover {
+            background-color: #580B2C; /* Darker color on hover */
+        }
+        
+        .checkbox-group {
+        display: flex;
+        align-items: center;
+        }
+
+        .checkbox-group input {
+        margin-right: 5px;
+        }
+
+    </style>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+</head>
+<body>
+<h1>Network Discovery</h1>
+<!-- Form Container: Contains two forms in the same line -->
+<div class="form-container">
+
+    <!-- Form 1: Network Discovery - Top Left -->
+    <form id="networkDiscoveryForm">
+        <h2>IP Range</h2>
+        <label for="networkName">Name:</label>
+        <input type="text" id="networkName" name="networkName">
+        <br>
+        <label for="startipAddress">Start IP:</label>
+        <input type="text" id="startipAddress" name="startipAddress">
+        <br>
+        <label for="endipAddress">End IP:</label>
+        <input type="text" id="endipAddress" name="endipAddress">
+        <br>
+        
+        <input type="button" id="discoverBtn1" value="Discover" onclick="discoverFile1()">
+        <input type="button" value="Clear" onclick="clearForm1()">
+    </form>
+
+    <!-- Form 2: Import from CSV - Top Right -->
+    <form id="importForm">
+        <h2>Import from CSV</h2>
+        <label for="csvFileName">CSV File Import</label>
+        <input type="text" id="csvFileName" name="csvFileName">
+        <input type="button" id="browseBtn" value="Browse" onclick="browseFile()">
+        <br>    
+
+        <input type="button" id="discoverBtn2" value="Discover" onclick="discoverFile2()">
+        <input type="button" value="Clear" onclick="clearForm2()">
+        <br>
+        
+    </form>
+
+</div>
+
+
+<div class="button-container">
+    <a href="shownetworkdevices.php" target="_blank" class="left-button">Network Devices</a>
+    <a href="showadddevice.php" target="_blank" class="center-button">Add Devices History</a>
+    <a href="showcsvhistory.php" target="_blank" class="right-button">CSV History</a>
+</div>
+
+<!-- Form 3: Add Device/Server - Center Bottom -->
+<form id="addDeviceForm">
+    <h2>Add Device/Server</h2>
+    <label for="ipAddress">IP Address:</label>
+    <input type="text" id="ipAddress" name="ipAddress">
+    <br>
+    <input type="button" id="addDeviceBtn" value="Add Device" onclick="addDevice()">
+    <input type="button" value="Clear" onclick="clearForm3()">
+</form>
+
+</body>
+</html>
